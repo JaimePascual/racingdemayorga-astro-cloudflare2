@@ -1,50 +1,400 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+const siteTitle = "Racing de Mayorga";
+const siteDescription = "Web oficial del club de fútbol Racing de Mayorga.";
+const news = [
+  {
+    date: "26 OCT 2026",
+    title: "El equipo afronta un nuevo reto en la liga",
+    description: "El Racing de Mayorga sigue trabajando para afrontar esta nueva jornada de la competición.",
+    image: "noticias-1.jpg",
+    alt: "Jugadores del equipo reunidos"
+  },
+  {
+    date: "18 OCT 2026",
+    title: "Gran ambiente en el partido del fin de semana",
+    description: "La afición respondió y el equipo demostró su compromiso en un partido muy disputado.",
+    image: "noticias-2.jpg",
+    alt: "Balón de fútbol sobre el césped"
+  },
+  {
+    date: "10 OCT 2026",
+    title: "Mejora en las instalaciones del campo",
+    description: "Se han realizado trabajos de mantenimiento y mejora en el terreno de juego y en las gradas.",
+    image: "noticias-3.jpg",
+    alt: "Campo de fútbol iluminado"
+  },
+  {
+    date: "01 OCT 2026",
+    title: "Nueva jornada, mismo objetivo",
+    description: "El equipo afronta con ilusión el próximo partido de la liga.",
+    image: "noticias-4.jpg",
+    alt: "Jugador conduciendo el balón"
+  }
+];
 ---
-
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={siteDescription} />
+    <meta name="theme-color" content="#080a0b" />
+    <title>{siteTitle} | Pasión por el fútbol</title>
+    <style>
+      :root {
+        --black: #080a0b;
+        --black-soft: #111416;
+        --yellow: #ffe500;
+        --white: #fff;
+        --ink: #10131b;
+        --muted: #c7c9ca;
+        --green: #174d32;
+        --max: 1320px;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.5;
+      }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; }
+      .wrap { width: min(var(--max), calc(100% - 7.5rem)); margin-inline: auto; }
+      .site-header {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        background: var(--black);
+        color: #fff;
+        position: relative;
+        z-index: 5;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+      }
+      .brand { display: flex; align-items: center; gap: 14px; min-width: 240px; }
+      .brand img { width: 58px; height: 68px; object-fit: contain; }
+      .brand-name {
+        font-size: clamp(18px, 2vw, 27px);
+        line-height: .98;
+        font-weight: 900;
+        letter-spacing: -.7px;
+        text-transform: uppercase;
+      }
+      .brand-name span { display: block; color: var(--yellow); }
+      .main-nav { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 34px); }
+      .main-nav a {
+        color: #f5f5f5;
+        font-size: 14px;
+        padding: 10px 0;
+        border-bottom: 3px solid transparent;
+      }
+      .main-nav a:hover, .main-nav a.active { color: var(--yellow); border-color: var(--yellow); }
+      .header-slogan {
+        align-self: stretch;
+        display: grid;
+        place-content: center;
+        min-width: 170px;
+        padding: 12px 22px;
+        margin-right: calc((min(var(--max), 100vw - 7.5rem) - 100vw) / 2);
+        background: var(--yellow);
+        color: #050505;
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1.2;
+        text-align: center;
+        text-transform: uppercase;
+        clip-path: polygon(22% 0,100% 0,100% 100%,0 100%);
+      }
+      .hero {
+        min-height: 345px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        background:
+          linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.57) 42%, rgba(0,0,0,.05) 100%),
+          linear-gradient(0deg, rgba(0,0,0,.22), rgba(0,0,0,.08)),
+          url('/images/hero-futbol.jpg') center 54% / cover no-repeat,
+          #252a24;
+      }
+      .hero-content { padding-block: 54px; }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0 0 10px;
+        color: var(--yellow);
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .eyebrow::before { content: ""; width: 48px; height: 7px; background: var(--yellow); }
+      h1 {
+        max-width: 620px;
+        margin: 0;
+        font-size: clamp(48px, 7vw, 76px);
+        font-weight: 900;
+        letter-spacing: -2.5px;
+        line-height: .98;
+      }
+      h1 span { color: var(--yellow); display: block; }
+      .hero-subtitle { margin: 17px 0 0; font-size: clamp(19px, 2vw, 23px); line-height: 1.2; font-weight: 600; }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 22px;
+        font-size: clamp(22px, 2.6vw, 29px);
+        font-weight: 900;
+        line-height: 1.1;
+        text-transform: uppercase;
+      }
+      .section-title::before { content: ""; display: block; width: 7px; height: 34px; background: var(--yellow); flex: 0 0 7px; }
+      .club-intro { background: #fff; padding: 34px 0; }
+      .club-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 40px; }
+      .club-copy p { max-width: 570px; margin: 0 0 18px; font-size: 16px; }
+      .crest-large { display: flex; justify-content: center; align-items: center; min-height: 205px; }
+      .crest-large img { width: min(205px, 70%); height: 205px; object-fit: contain; }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        min-height: 43px;
+        padding: 0 24px;
+        border-radius: 6px;
+        background: var(--yellow);
+        color: #050505;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+        transition: transform .2s ease, background .2s ease;
+      }
+      .btn:hover { transform: translateY(-2px); background: #f2d900; }
+      .news-section { background: var(--black); color: #fff; padding: 28px 0 30px; }
+      .news-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .all-news { color: #fff; font-size: 14px; }
+      .all-news span, .read-more span { color: var(--yellow); margin-left: 8px; font-size: 20px; }
+      .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+      .news-card { min-width: 0; }
+      .photo {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1.55 / 1;
+        object-fit: cover;
+        background: linear-gradient(135deg, #313a32, #15191a);
+        border: 1px solid #45494a;
+      }
+      .news-card time { display: block; margin: 9px 0 4px; font-size: 12px; color: #e5e5e5; }
+      .news-card h3 { margin: 0 0 7px; font-size: 16px; line-height: 1.25; font-weight: 800; }
+      .news-card p { margin: 0 0 8px; color: #e0e0e0; font-size: 13px; line-height: 1.45; }
+      .read-more { color: var(--yellow); font-size: 13px; font-weight: 800; }
+      .feature-section { padding: 34px 0; background: #fff; }
+      .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; }
+      .feature { display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 18px; }
+      .feature img { width: 100%; aspect-ratio: 1.25 / 1; object-fit: cover; background: #ddd; }
+      .feature h2 { margin: 0 0 10px; font-size: 20px; font-weight: 900; text-transform: uppercase; line-height: 1.15; }
+      .feature h2::before { content: ""; display: inline-block; width: 6px; height: 23px; margin-right: 9px; vertical-align: -4px; background: var(--yellow); }
+      .feature p { margin: 0 0 14px; font-size: 13px; }
+      .feature .btn { min-height: 38px; padding-inline: 18px; font-size: 11px; }
+      .quick-links { padding: 26px 0 22px; background: #f4f4f4; }
+      .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; text-align: center; }
+      .quick-item { display: flex; flex-direction: column; align-items: center; }
+      .quick-item img { width: 44px; height: 44px; object-fit: contain; margin-bottom: 5px; }
+      .quick-item h3 { margin: 0 0 4px; font-size: 15px; font-weight: 900; text-transform: uppercase; }
+      .quick-item p { margin: 0 0 5px; font-size: 12px; line-height: 1.35; }
+      .quick-item a { font-size: 12px; font-weight: 800; }
+      .quick-item a span { color: #c3a900; font-size: 18px; }
+      .site-footer { padding: 22px 0 14px; background: var(--black); color: #fff; }
+      .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 16px; }
+      .footer-brand { display: flex; align-items: center; gap: 12px; }
+      .footer-brand img { width: 54px; height: 58px; object-fit: contain; }
+      .footer-brand strong { display: block; font-size: 17px; text-transform: uppercase; }
+      .footer-brand strong span { color: var(--yellow); }
+      .footer-brand small { display: block; color: #ddd; font-size: 12px; }
+      .socials { display: flex; gap: 18px; align-items: center; font-weight: 900; }
+      .socials a { color: #fff; font-size: 18px; }
+      .footer-bottom { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid #34383a; padding-top: 12px; color: #ddd; font-size: 11px; }
+      .footer-links { display: flex; gap: 18px; }
+      .footer-links a:hover, .socials a:hover { color: var(--yellow); }
+      @media (max-width: 900px) {
+        .wrap { width: min(100% - 40px, var(--max)); }
+        .header-slogan { display: none; }
+        .brand { min-width: 190px; }
+        .main-nav { gap: 14px; }
+        .news-grid { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+        .feature-grid { gap: 24px; }
+        .feature { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        .site-header { padding: 10px 0; }
+        .header-inner { flex-wrap: wrap; gap: 8px 18px; }
+        .brand { min-width: 0; }
+        .brand img { width: 44px; height: 50px; }
+        .brand-name { font-size: 18px; }
+        .main-nav { width: 100%; overflow-x: auto; gap: 20px; order: 2; }
+        .main-nav a { white-space: nowrap; font-size: 13px; }
+        .hero { min-height: 330px; background-position: 60% center; }
+        .hero-content { padding-block: 48px; }
+        h1 { font-size: 52px; }
+        .club-grid { grid-template-columns: 1fr; gap: 10px; }
+        .crest-large { min-height: 130px; }
+        .crest-large img { height: 135px; }
+        .news-heading { align-items: flex-start; flex-direction: column; gap: 0; }
+        .news-grid { grid-template-columns: 1fr 1fr; gap: 22px 14px; }
+        .news-card h3 { font-size: 14px; }
+        .news-card p { font-size: 12px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .feature { grid-template-columns: .85fr 1.15fr; gap: 13px; }
+        .feature h2 { font-size: 16px; }
+        .feature p { font-size: 12px; }
+        .feature .btn { padding-inline: 12px; font-size: 10px; }
+        .quick-grid { grid-template-columns: repeat(2, 1fr); row-gap: 24px; }
+        .footer-top, .footer-bottom { align-items: flex-start; flex-direction: column; }
+        .footer-links { flex-wrap: wrap; gap: 12px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#inicio" aria-label="Racing de Mayorga, inicio">
+          <img src="/images/escudo-racing.png" alt="Escudo del Racing de Mayorga" />
+          <span class="brand-name">Racing de<span>Mayorga</span></span>
+        </a>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a class="active" href="#inicio">Inicio</a>
+          <a href="#club">Club</a>
+          <a href="#equipo">Equipo</a>
+          <a href="#noticias">Noticias</a>
+          <a href="#galeria">Galería</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <div class="header-slogan">Juntos<br />somos más<br />fuertes</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="wrap hero-content">
+          <p class="eyebrow">Racing de Mayorga</p>
+          <h1>Pasión por el <span>fútbol</span></h1>
+          <p class="hero-subtitle">Un club, una ciudad,<br />una misma ilusión.</p>
+        </div>
+      </section>
+
+      <section class="club-intro" id="club">
+        <div class="wrap club-grid">
+          <div class="club-copy">
+            <h2 class="section-title">El club</h2>
+            <p>El Racing de Mayorga es un club de fútbol con una larga trayectoria, formado por jugadores, técnicos, familias y aficionados que comparten la misma pasión: el fútbol.</p>
+            <a class="btn" href="#historia">Conocé nuestra historia <span>→</span></a>
+          </div>
+          <div class="crest-large">
+            <img src="/images/escudo-racing.png" alt="Escudo del Racing de Mayorga" />
+          </div>
+        </div>
+      </section>
+
+      <section class="news-section" id="noticias">
+        <div class="wrap">
+          <div class="news-heading">
+            <h2 class="section-title">Últimas noticias</h2>
+            <a class="all-news" href="#noticias">Ver todas las noticias <span>→</span></a>
+          </div>
+          <div class="news-grid">
+            {news.map((item) => (
+              <article class="news-card">
+                <img class="photo" src={`/images/${item.image}`} alt={item.alt} loading="lazy" />
+                <time>{item.date}</time>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <a class="read-more" href="#noticias">Leer más <span>→</span></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-section" id="historia">
+        <div class="wrap feature-grid">
+          <article class="feature">
+            <img src="/images/historia.jpg" alt="Fotografía histórica del equipo" loading="lazy" />
+            <div>
+              <h2>Nuestra historia</h2>
+              <p>El Racing de Mayorga nace de la pasión por el fútbol y el compromiso de un grupo de personas que creen en el deporte como herramienta de unión, respeto y superación.</p>
+              <a class="btn" href="#club">Conocé más sobre el club <span>→</span></a>
+            </div>
+          </article>
+          <article class="feature" id="equipo">
+            <img src="/images/categorias.jpg" alt="Instalaciones deportivas" loading="lazy" />
+            <div>
+              <h2>Nuestras categorías</h2>
+              <p>Desde los más pequeños hasta el equipo sénior. Formación, valores y deporte en cada etapa.</p>
+              <a class="btn" href="#equipo">Ver equipos <span>→</span></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="quick-links" id="galeria">
+        <div class="wrap quick-grid">
+          <article class="quick-item">
+            <img src="/images/icono-club.png" alt="" loading="lazy" />
+            <h3>El club</h3>
+            <p>Conocé nuestra historia<br />y valores.</p>
+            <a href="#club">Saber más <span>→</span></a>
+          </article>
+          <article class="quick-item">
+            <img src="/images/icono-equipo.png" alt="" loading="lazy" />
+            <h3>Equipo</h3>
+            <p>Jugadores, cuerpo técnico<br />y calendario.</p>
+            <a href="#equipo">Saber más <span>→</span></a>
+          </article>
+          <article class="quick-item">
+            <img src="/images/icono-galeria.png" alt="" loading="lazy" />
+            <h3>Galería</h3>
+            <p>Fotos de partidos, eventos<br />y mucho más.</p>
+            <a href="#galeria">Ver galería <span>→</span></a>
+          </article>
+          <article class="quick-item" id="contacto">
+            <img src="/images/icono-contacto.png" alt="" loading="lazy" />
+            <h3>Contacto</h3>
+            <p>¿Tienes alguna consulta?<br />Escríbenos.</p>
+            <a href="#contacto">Contactar <span>→</span></a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <a class="footer-brand" href="#inicio">
+            <img src="/images/escudo-racing.png" alt="" />
+            <span><strong>Racing de <span>Mayorga</span></strong><small>Pasión&nbsp; • &nbsp;Esfuerzo&nbsp; • &nbsp;Equipo</small></span>
+          </a>
+          <div class="socials" aria-label="Redes sociales">
+            <a href="#contacto" aria-label="Facebook">f</a>
+            <a href="#contacto" aria-label="Instagram">◎</a>
+            <a href="#contacto" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Racing de Mayorga. Todos los derechos reservados.</span>
+          <nav class="footer-links" aria-label="Enlaces legales">
+            <a href="#contacto">Aviso legal</a>
+            <a href="#contacto">Privacidad</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
